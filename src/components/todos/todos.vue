@@ -68,7 +68,7 @@ export default {
     menu: false,
     todoInput:"",
     progressShow:true,
-    todos:localStorage.todoList ? JSON.parse(localStorage.todoList) : []
+    todos:localStorage.todoList ? JSON.parse(localStorage.todoList) : ["计划加入动画","输入后按回车就行哦","记得给star"]
   }),
   watch: {
     menu() {
