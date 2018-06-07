@@ -38,7 +38,7 @@
                 <span>{{chipItem.description}}</span>
                 </v-tooltip>
                 </div>
-                <v-btn fab dark small color="primary"  @click.native="addChipDialog = true; addBtnIndex = index">
+                <v-btn class="addBtnSmall" fab dark small color="primary"  @click.native="addChipDialog = true; addBtnIndex = index">
                     <v-icon dark>add</v-icon>
                 </v-btn>
                 
@@ -76,7 +76,7 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-progress-circular indeterminate color="primary" v-show="progressShow"></v-progress-circular>
-          <v-btn color="blue darken-1" flat @click.native="addChipDialog = false;">关闭</v-btn>
+          <v-btn color="blue darken-1" flat @click.native="addChipDialog = false; addlinkLink = '';addlinkDescription = '';addlinkTitle = '';addlinkIcon = '';">关闭</v-btn>
           <v-btn color="blue darken-1" flat @click.native="addChipSave">保存</v-btn>
         </v-card-actions>
       </v-card>
@@ -89,7 +89,7 @@
           <v-container grid-list-md>
             <v-layout wrap>
                  <v-flex xs12>
-                    <v-text-field label="修改卡片名称"  v-model="editCartInput"  placeholder="请填入新的名称"></v-text-field>
+                    <v-text-field label="修改卡片名称"  v-model="editCartInput"  placeholder="请填入新的名称" v-on:keyup.13="editCardSave"></v-text-field>
                 </v-flex>
             </v-layout>
           </v-container>
@@ -457,6 +457,13 @@ export default {
 .indigoText label {
   color: #3875cc !important;
   font-weight: 700;
+}
+@media screen and (max-width: 550px) {
+    .addBtnSmall {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+    }
 }
 </style>
 

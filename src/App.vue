@@ -1,30 +1,6 @@
 <template>
   <div id="app">
   <v-app id="inspire">
-    <v-navigation-drawer
-      fixed
-      :clipped="$vuetify.breakpoint.mdAndUp"
-      app
-      v-model="drawer">
-      <v-list dense>
-        <template v-for="item in items">
-   
-        <router-link :to="item.routerLink"  :key="item.text">
-          <v-list-tile @click="" v-ripple>
-            <v-list-tile-action>
-              <v-icon>{{ item.icon }}</v-icon>
-            </v-list-tile-action>
-            <v-list-tile-content>
-              <v-list-tile-title>
-                {{ item.text }}
-              </v-list-tile-title>
-            </v-list-tile-content>
-          </v-list-tile>
-        </router-link>
-
-        </template>
-      </v-list>
-    </v-navigation-drawer>
 
     
     <v-toolbar
@@ -33,8 +9,7 @@
       app
       :clipped-left="$vuetify.breakpoint.mdAndUp"
       fixed>
-      <v-toolbar-title style="width: 300px; text-align: left;" class="ml-0 pl-3">
-        <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+      <v-toolbar-title style="width: 300px; text-align: left; text-indent: 20px;" class="ml-0 pl-3">
         <span class="">Material Page</span>
       </v-toolbar-title>
       
@@ -66,6 +41,7 @@
       ></v-text-field>
       
       <v-spacer></v-spacer>
+      <v-todos></v-todos>
       <v-tooltip bottom>
         <v-btn icon large  slot="activator"  target="_blank" href="https://github.com/zc95/material-page">
         <v-avatar size="32px" tile>
@@ -82,9 +58,7 @@
     
     <v-content style="padding-top: 0;">
       <v-container>
-       <keep-alive>
-            <router-view></router-view>
-        </keep-alive>
+       <v-links></v-links>
       </v-container>
     </v-content>
 
@@ -93,7 +67,8 @@
 </template>
 
 <script type="text/ecmascript-6">
-
+import links from "components/links/links";
+import todos from "components/todos/todos";
 export default {
   props: {
     source: String
@@ -101,13 +76,6 @@ export default {
   data() {
     return {
       dialog: false,
-      drawer: null,
-      items: [
-        { icon: "home", text: "HomePage", routerLink:'/homepage', color:'red' },
-        { icon: "link", text: "Links", routerLink:'/links', color:'orange'  },
-        { icon: "list", text: "Todo", routerLink:'/todos', color:'green'  },
-        { icon: "settings", text: "Settings", routerLink:'/settings', color:'yellow'  }
-      ],
       searcher: [
         {
           icon:
@@ -151,7 +119,11 @@ export default {
         window.open("https://www.google.com.hk/search?q=" + this.searchInput);
       }
     }
-  }
+  },
+  components: {
+    "v-links": links,
+    'v-todos':todos
+  } 
 };
 </script>
 
@@ -164,20 +136,6 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
-.list--dense .list__tile:not(.list__tile--avatar) {
-  height: 55px;
-  font-size: 14px;
-}
-.list--dense a{
-  text-decoration: none;
-  color: #212121 !important;
-  width: 100%;
-    padding: 0;
-    text-indent: 20px;
-}
 
-.navigation-drawer .list--dense .router-link-exact-active .material-icons,.navigation-drawer .list--dense .router-link-exact-active .list__tile{
-  color: #09788b !important;
-}
 
 </style>

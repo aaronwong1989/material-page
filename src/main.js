@@ -3,19 +3,16 @@
 import Vue from 'vue'
 import VueResource from 'vue-resource';
 import App from './App'
-import router from './router/index.js';
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.css'
-
+import links from 'components/links/links';
 Vue.use(Vuetify)
-Vue.use(VueResource);
 
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
-  router,
   components: { App },
   template: '<App/>'
 })
