@@ -1,7 +1,5 @@
 # Material Page
 
-> Homepage for your browser
->
 > Nature, Pure
 >
 > 原质，纯粹
@@ -9,12 +7,16 @@
 ![](https://ws4.sinaimg.cn/large/006tKfTcgy1fs33tk274xj31kw0zkwnc.jpg)
 
 
-
 `Material Page` 是一个客制化上网首页
 
 基于 Material Design & vuetifyjs & Vue.js
 
 集成搜索，网站收藏和分类，TODO
+
+## 链接
+demo：[https://zc95.github.io/demo/material-page/index.html](https://zc95.github.io/demo/material-page/index.html)
+
+github：[https://github.com/zc95/material-page](https://github.com/zc95/material-page)
 
 ## 功能
 
@@ -36,3 +38,4 @@ npm run build
 ```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
