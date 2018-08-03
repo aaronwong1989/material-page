@@ -22,7 +22,7 @@
                         <span>删除不可恢复</span>
                     </v-tooltip>
                 </div>
-          
+
             </v-card-title>
 
             <v-container>
@@ -41,7 +41,7 @@
                 <v-btn class="addBtnSmall" fab dark small color="primary"  @click.native="addChipDialog = true; addBtnIndex = index">
                     <v-icon dark>add</v-icon>
                 </v-btn>
-                
+
             </v-container>
         </v-card>
 
@@ -55,19 +55,23 @@
           <v-container grid-list-md>
             <v-layout wrap>
                  <v-flex xs12>
-                    <v-text-field label="网址" required  v-model="addlinkLink"  v-on:keyup.13="addChipSave"></v-text-field>
+                   <v-text-field label="网址" required v-model="formInfo.addlinkLink"
+                                 v-on:keyup.13="addChipSave"></v-text-field>
                 </v-flex>
                 <v-flex xs12>
-                    <v-text-field label="标题" v-model="addlinkTitle" v-on:keyup.13="addChipSave"></v-text-field>
+                  <v-text-field label="标题" v-model="formInfo.addlinkTitle" v-on:keyup.13="addChipSave"></v-text-field>
                 </v-flex>
                 <v-flex xs12>
-                <v-text-field label="描述" v-model="addlinkDescription" v-on:keyup.13="addChipSave"></v-text-field>
+                  <v-text-field label="描述" v-model="formInfo.addlinkDescription"
+                                v-on:keyup.13="addChipSave"></v-text-field>
                 </v-flex>
                 <v-flex xs12>
-                    <v-text-field label="图标" v-model="addlinkIcon" placeholder="https://ws4.sinaimg.cn/large/006tKfTcgy1fs1v1efxpgj30sg0sgac4.jpg" v-on:keyup.13="addChipSave"></v-text-field>
+                  <v-text-field label="图标" v-model="formInfo.addlinkIcon"
+                                placeholder="https://ws4.sinaimg.cn/large/006tKfTcgy1fs1v1efxpgj30sg0sgac4.jpg"
+                                v-on:keyup.13="addChipSave"></v-text-field>
                 </v-flex>
                 <v-flex xs12>
-                <v-switch label="置顶" :class="{ indigoText: switch1 }" v-model="switch1" ></v-switch>
+                  <v-switch label="置顶" :class="{ indigoText: formInfo.switch1 }" v-model="formInfo.switch1"></v-switch>
                 </v-flex>
                 <small class="indigo--text">网址是必填项哦，其他可不填，按回车键保存</small>
             </v-layout>
@@ -76,7 +80,10 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-progress-circular indeterminate color="primary" v-show="progressShow"></v-progress-circular>
-          <v-btn color="blue darken-1" flat @click.native="addChipDialog = false; addlinkLink = '';addlinkDescription = '';addlinkTitle = '';addlinkIcon = '';">关闭</v-btn>
+          <v-btn color="blue darken-1" flat
+                 @click.native="addChipDialog = false; formInfo.addlinkLink = '';formInfo.addlinkDescription = '';formInfo.addlinkTitle = '';formInfo.addlinkIcon = '';">
+            关闭
+          </v-btn>
           <v-btn color="blue darken-1" flat @click.native="addChipSave">保存</v-btn>
         </v-card-actions>
       </v-card>
@@ -117,16 +124,18 @@ export default {
       links: linksJsonv3,
       addChipDialog: false,
       addBtnIndex: 0,
-      addlinkTitle: "",
-      addlinkLink: "",
-      addlinkDescription: "",
-      addlinkIcon: "",
+      formInfo: {
+        addlinkTitle: "",
+        addlinkLink: "",
+        addlinkDescription: "",
+        addlinkIcon: "",
+        switch1: false
+      },
       snackbar: false,
       snackbarMessage: "hello",
       timeout: 1500,
       snackColor: "error",
       progressShow: false,
-      switch1: false,
       editCartDialog: false,
       editCartInput: ""
     };
@@ -149,52 +158,52 @@ export default {
       this.links[index].items.splice(chipIndex, 1);
     },
     addChipSave() {
-      if (this.addlinkLink === "" || this.addlinkLink === null) {
+      if (this.formInfo.addlinkLink === "" || this.formInfo.addlinkLink === null) {
         this.snackColor = "error";
         this.snackbarMessage = "网址不能为空";
         this.snackbar = true;
         return false;
       }
-      if (this.addlinkLink.indexOf("http") < 0) {
-        this.addlinkLink = "https://" + this.addlinkLink;
+      if (this.formInfo.addlinkLink.indexOf("http") < 0) {
+        this.formInfo.addlinkLink = "https://" + this.formInfo.addlinkLink;
       }
-      if (this.addlinkTitle === "" || this.addlinkTitle === null) {
-        this.addlinkTitle = this.addlinkLink.replace(
+      if (this.formInfo.addlinkTitle === "" || this.formInfo.addlinkTitle === null) {
+        this.formInfo.addlinkTitle = this.formInfo.addlinkLink.replace(
           /www.|.com|.net|.cn|http:|https:|\/\//g,
           ""
         );
       }
-      if (this.addlinkDescription === "" || this.addlinkDescription === null) {
-        this.addlinkDescription = this.addlinkTitle;
+      if (this.formInfo.addlinkDescription === "" || this.formInfo.addlinkDescription === null) {
+        this.formInfo.addlinkDescription = this.formInfo.addlinkTitle;
       }
-      if (this.addlinkIcon === "" || this.addlinkIcon === null) {
-        this.addlinkIcon =
+      if (this.formInfo.addlinkIcon === "" || this.formInfo.addlinkIcon === null) {
+        this.formInfo.addlinkIcon =
           "https://ws4.sinaimg.cn/large/006tKfTcgy1fs1v1efxpgj30sg0sgac4.jpg";
       }
-      var self = this;
+      let self = this;
       this.progressShow = true;
       setTimeout(function() {
-        if (self.switch1) {
+        if (self.formInfo.switch1) {
           self.links[self.addBtnIndex].items.unshift({
-            title: self.addlinkTitle,
-            icon: self.addlinkIcon,
-            description: self.addlinkDescription,
-            link: self.addlinkLink
+            title: self.formInfo.addlinkTitle,
+            icon: self.formInfo.addlinkIcon,
+            description: self.formInfo.addlinkDescription,
+            link: self.formInfo.addlinkLink
           });
         } else {
           self.links[self.addBtnIndex].items.push({
-            title: self.addlinkTitle,
-            icon: self.addlinkIcon,
-            description: self.addlinkDescription,
-            link: self.addlinkLink
+            title: self.formInfo.addlinkTitle,
+            icon: self.formInfo.addlinkIcon,
+            description: self.formInfo.addlinkDescription,
+            link: self.formInfo.addlinkLink
           });
         }
 
         self.addChipDialog = false;
-        self.addlinkLink = "";
-        self.addlinkDescription = "";
-        self.addlinkTitle = "";
-        self.addlinkIcon = "";
+        self.formInfo.addlinkLink = "";
+        self.formInfo.addlinkDescription = "";
+        self.formInfo.addlinkTitle = "";
+        self.formInfo.addlinkIcon = "";
         self.progressShow = false;
       }, 820);
     },
