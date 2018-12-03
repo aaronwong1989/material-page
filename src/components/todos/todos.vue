@@ -19,10 +19,10 @@
         <v-list>
           <v-list-tile avatar>
             <v-list-tile-avatar>
-              <img class='myico' src="https://zc95.github.io/img/favicon%20.ico" alt="ico">
+              <img class='myico' src="/icon/gitlab-favicon-192x192.png" alt="ico">
             </v-list-tile-avatar>
             <v-list-tile-content>
-              <v-list-tile-title>Material Page - Todo</v-list-tile-title>
+              <v-list-tile-title>ZYBank Work - Todo</v-list-tile-title>
               <v-list-tile-sub-title>待办 · {{todos.length==0?'暂无':todos.length}}</v-list-tile-sub-title>
             </v-list-tile-content>
             <v-list-tile-action>
@@ -68,7 +68,7 @@ export default {
     menu: false,
     todoInput:"",
     progressShow:true,
-    todos:localStorage.todoList ? JSON.parse(localStorage.todoList) : ["计划加入动画","输入后按回车就行哦","记得给star"]
+    todos:localStorage.todoList ? JSON.parse(localStorage.todoList) : ["域名不可访问请翻到页底","安装gitbash","申请gitlab账号"]
   }),
   watch: {
     menu() {
