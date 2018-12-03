@@ -68,7 +68,7 @@ export default {
     menu: false,
     todoInput:"",
     progressShow:true,
-    todos:localStorage.todoList ? JSON.parse(localStorage.todoList) : ["域名不可访问请翻到页底","安装gitbash","申请gitlab账号"]
+    todos:localStorage.todoList ? JSON.parse(localStorage.todoList) : ["检查和配置DNS","安装gitbash","申请gitlab账号"]
   }),
   watch: {
     menu() {
