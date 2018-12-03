@@ -66,7 +66,7 @@
 </div>
 </template>
 
-<script type="text/javascript">
+<script type="text/ecmascript-6">
 import links from "components/links/links";
 import todos from "components/todos/todos";
 export default {
