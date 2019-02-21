@@ -6,6 +6,7 @@
     </v-snackbar>
 
     <v-btn class="pink white--text" style="margin-bottom:20px;" @click="addCard">添加一个新卡片</v-btn>
+    <v-btn class="pink white--text" style="margin-bottom:20px;" @click="pullList">获取首页更新</v-btn>
     <v-card v-for="(item,index) in links" :key="index">
       <v-card-title primary-title style=" height: 70px;">
         <h4 class="headline mb-0">{{item.title}}</h4>
@@ -157,7 +158,7 @@
 <script type="text/ecmascript-6">
 let linksJsonv3 = localStorage.linksJsonv3
   ? JSON.parse(localStorage.linksJsonv3)
-  : window.listData;
+  : window.listData.concat();
 export default {
   data() {
     return {
@@ -270,6 +271,19 @@ export default {
         this.snackbar = true;
       }
       this.links.unshift({ title: "新卡片", items: [] });
+    },
+    pullList() {
+      // 来自服务器的数
+      let srvJsonList = JSON.stringify(window.listData);
+      // 备份用户的首页
+      localStorage.linksJsonv4 = JSON.stringify(this.links);
+      // 覆盖用户数据
+      this.links = JSON.parse(srvJsonList);
+      localStorage.linksJsonv3 = srvJsonList;
+
+      this.snackColor = "cyan darken-2";
+      this.snackbarMessage = "您原来的首页信息备份在localStorage.linksJsonv4中，请注意保存！";
+      this.snackbar = true;
     },
     deleteCard(index) {
       this.links.splice(index, 1);
